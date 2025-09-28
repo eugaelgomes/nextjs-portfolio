@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://gaelgomes.dev/sitemap.xml
+
+# Disallow crawling of API routes if any
+Disallow: /api/
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Crawl-delay for slower bots (optional)
+User-agent: *
+Crawl-delay: 1

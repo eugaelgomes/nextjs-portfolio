@@ -8,7 +8,13 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaFilePdf } from "react-icons/fa6";
-import { FaProjectDiagram } from "react-icons/fa";
+//import { FaProjectDiagram } from "react-icons/fa";
+import { FaMobileScreen } from "react-icons/fa6";
+import { FaServer } from "react-icons/fa6";
+import { FaDatabase } from "react-icons/fa";
+import { FaCloud } from "react-icons/fa";
+import ProjetosModal from "./modals/projetos";
+import FeedLinks from "../components/FeedLinks";
 
 // Tipos para as stats do GitHub
 interface GitHubStats {
@@ -105,6 +111,7 @@ const useGitHubStats = (username: string) => {
 };
 
 export default function Home() {
+  const [modalOpen, setModalOpen] = useState(false);
   // Busca os repositórios do GitHub
   const { repos, loading } = useGitHubRepos("eugaelgomes");
   // Busca as stats do GitHub
@@ -132,7 +139,7 @@ export default function Home() {
   };
 
   return (
-    <div className="md:h-screen lg:h-screen bg-black overflow-hidden flex flex-col lg:flex-row relative">
+    <div className="min-h-screen lg:h-screen bg-black overflow-hidden flex flex-col lg:flex-row relative">
       {/* TV Static Effect */}
       <div 
         className="absolute inset-0 opacity-[0.03] pointer-events-none z-0"
@@ -170,10 +177,10 @@ export default function Home() {
       />
 
       {/* Left Side - Main Content */}
-      <div className="flex-1 flex flex-col justify-center px-4 sm:px-8 lg:px-12 py-4 lg:py-0 relative z-10">
+      <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-8 xl:px-12 py-4 lg:py-6 relative z-10">
         <div className="max-w-xl">
           {/* Profile Section */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
             {/* Profile Picture */}
             <div className="flex-shrink-0">
               <Image
@@ -181,23 +188,23 @@ export default function Home() {
                 alt="Gael Gomes"
                 width={100}
                 height={100}
-                className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full object-cover outline-2 outline-purple-400"
+                className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-lg object-cover outline-2 outline-purple-600"
                 priority
               />
             </div>
 
             {/* Name and Title */}
             <div className="flex-1">
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-light text-gray-100 mb-1">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-light text-gray-100 mb-1">
                 Gael Gomes
               </h1>
-              <h2 className="text-sm sm:text-base lg:text-lg text-gray-300 font-mono">
+              <h2 className="text-xs sm:text-sm lg:text-base text-gray-300 font-mono">
                 Desenvolvedor Full Stack, {calculateAge()} anos
               </h2>
             </div>
           </div>
 
-          <p className="text-sm text-justify text-gray-200 mb-4 sm:mb-5 leading-relaxed">
+          <p className="text-xs sm:text-sm text-justify text-gray-200 mb-3 sm:mb-4 leading-relaxed">
             Sou curioso, autodidata e movido a café e código ☕💻. Curso
             Engenharia de Software com foco em frontend, backend e elaboração de
             requisitos de projetos. Já desenvolvi projetos pessoais que simulam
@@ -206,17 +213,17 @@ export default function Home() {
           </p>
 
           {/* Contact Links */}
-          <div className="flex gap-3 sm:gap-4 flex-wrap mb-3 sm:mb-4">
+          <div className="flex gap-2 sm:gap-3 flex-wrap mb-3 sm:mb-4">
             <Link
               href="mailto:hello@gaelgomes.dev"
-              className="text-gray-200 hover:text-purple-400 transition-colors border-b border-gray-600 hover:border-purple-400 text-xs sm:text-sm flex items-center"
+              className="text-gray-200 hover:text-purple-400 transition-colors border-b border-gray-600 hover:border-purple-400 text-xs flex items-center"
             >
               <MdEmail className="inline-block mr-1 text-sm" />
               Email
             </Link>
             <Link
               href="https://github.com/eugaelgomes"
-              className="text-gray-200 hover:text-purple-400 transition-colors border-b border-gray-600 hover:border-purple-400 text-xs sm:text-sm flex items-center"
+              className="text-gray-200 hover:text-purple-400 transition-colors border-b border-gray-600 hover:border-purple-400 text-xs flex items-center"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -225,7 +232,7 @@ export default function Home() {
             </Link>
             <Link
               href="https://linkedin.com/in/gael-rene-gomes/"
-              className="text-gray-200 hover:text-purple-400 transition-colors border-b border-gray-600 hover:border-purple-400 text-xs sm:text-sm flex items-center"
+              className="text-gray-200 hover:text-purple-400 transition-colors border-b border-gray-600 hover:border-purple-400 text-xs flex items-center"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -234,37 +241,36 @@ export default function Home() {
             </Link>
             <Link
               href="https://drive.google.com/drive/folders/18-vSkqabL7tgtjnjxL2HhBNQ1hSUngbK?usp=sharing"
-              className="text-gray-200 hover:text-purple-400 transition-colors border-b border-gray-600 hover:border-purple-400 text-xs sm:text-sm flex items-center"
+              className="text-gray-200 hover:text-purple-400 transition-colors border-b border-gray-600 hover:border-purple-400 text-xs flex items-center"
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaFilePdf className="inline-block mr-1 text-sm" />
               Currículo
             </Link>
-            <Link
-              href="https://gaelgomes.dev/projetos"
-              className="text-gray-200 hover:text-purple-400 transition-colors border-b border-gray-600 hover:border-purple-400 text-xs sm:text-sm flex items-center"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => setModalOpen(true)}
+              className="text-gray-200 hover:text-purple-400 transition-colors border-b border-gray-600 hover:border-purple-400 text-xs flex items-center"
+              title="Abrir modal com meus projetos"
             >
-              <FaProjectDiagram className="inline-block mr-1 text-sm" />
-              Meus Projetos
-            </Link>
+              {/*<FaProjectDiagram className="inline-block mr-1 text-sm" />
+              Meus Projetos*/}
+            </button>
           </div>
 
           {/* Education Section */}
-          <div className="mb-4 sm:mb-5">
-            <h3 className="text-base sm:text-lg font-light text-gray-200 mb-2 sm:mb-3">
+          <div className="mb-3 sm:mb-4">
+            <h3 className="text-sm sm:text-base font-light text-purple-600 mb-2">
               Formação
             </h3>
-            <div className="space-y-1.5 sm:space-y-2">
-              <div className="border-l-2 border-purple-500 pl-2 sm:pl-3">
+            <div className="space-y-1 sm:space-y-1.5">
+              <div className="border-l-2 border-purple-500 pl-2">
                 <h4 className="text-gray-200 font-semibold text-xs">
                   Engenharia de Software
                 </h4>
-                <p className="text-gray-300 text-xs">FBV • 2024 - 2028</p>
+                <p className="text-gray-300 text-xs">FBV • 2024 - 2028 | {"cursando"}</p>
               </div>
-              <div className="border-l-2 border-purple-500 pl-2 sm:pl-3">
+              <div className="border-l-2 border-purple-500 pl-2">
                 <h4 className="text-gray-200 font-semibold text-xs">
                   Técnico em Desenvolvimento de Sistemas
                 </h4>
@@ -276,17 +282,17 @@ export default function Home() {
           </div>
 
           {/* GitHub Stats */}
-          <div className="mt-4 sm:mt-5">
-            <h3 className="text-base sm:text-lg font-light text-gray-200 mb-3 sm:mb-4">
+          <div className="mt-3 sm:mt-4">
+            <h3 className="text-sm sm:text-base font-light text-purple-600 mb-2">
               GitHub Stats
             </h3>
 
             {statsLoading ? (
               // Loading placeholder
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
                 {[...Array(4)].map((_, i) => (
                   <div key={i} className="text-center">
-                    <div className="h-5 bg-gray-700 rounded mb-1 animate-pulse"></div>
+                    <div className="h-4 bg-gray-700 rounded mb-1 animate-pulse"></div>
                     <div className="h-2 bg-gray-700 rounded animate-pulse"></div>
                   </div>
                 ))}
@@ -294,33 +300,33 @@ export default function Home() {
             ) : stats ? (
               <>
                 {/* Stats Numbers */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
-                  <div className="text-center bg-gray-900/50 backdrop-blur-sm rounded-lg p-2 border border-gray-700">
-                    <div className="text-base sm:text-lg lg:text-xl font-light text-gray-200">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 mb-3">
+                  <div className="text-center bg-gray-900/50 backdrop-blur-sm rounded-lg p-1.5 border border-gray-900">
+                    <div className="text-sm sm:text-base lg:text-lg font-light text-gray-200">
                       {stats.public_repos}
                     </div>
                     <div className="text-xs text-gray-300 font-mono">
                       Repos
                     </div>
                   </div>
-                  <div className="text-center bg-gray-900/50 backdrop-blur-sm rounded-lg p-2 border border-gray-700">
-                    <div className="text-base sm:text-lg lg:text-xl font-light text-gray-200">
+                  <div className="text-center bg-gray-900/50 backdrop-blur-sm rounded-lg p-1.5 border border-gray-900">
+                    <div className="text-sm sm:text-base lg:text-lg font-light text-gray-200">
                       {stats.followers}
                     </div>
                     <div className="text-xs text-gray-300 font-mono">
                       Seguidores
                     </div>
                   </div>
-                  <div className="text-center bg-gray-900/50 backdrop-blur-sm rounded-lg p-2 border border-gray-700">
-                    <div className="text-base sm:text-lg lg:text-xl font-light text-gray-200">
+                  <div className="text-center bg-gray-900/50 backdrop-blur-sm rounded-lg p-1.5 border border-gray-900">
+                    <div className="text-sm sm:text-base lg:text-lg font-light text-gray-200">
                       {Object.keys(languages).length}
                     </div>
                     <div className="text-xs text-gray-300 font-mono">
                       Linguagens
                     </div>
                   </div>
-                  <div className="text-center bg-gray-900/50 backdrop-blur-sm rounded-lg p-2 border border-gray-700">
-                    <div className="text-base sm:text-lg lg:text-xl font-light text-gray-200">
+                  <div className="text-center bg-gray-900/50 backdrop-blur-sm rounded-lg p-1.5 border border-gray-900">
+                    <div className="text-sm sm:text-base lg:text-lg font-light text-gray-200">
                       {stats.following}
                     </div>
                     <div className="text-xs text-gray-300 font-mono">
@@ -332,9 +338,9 @@ export default function Home() {
                 {/* Top Languages */}
                 {Object.keys(languages).length > 0 && (
                   <div>
-                    <h4 className="text-xs sm:text-sm font-light text-gray-200 mb-2">
+                    <h3 className="text-sm sm:text-base font-light text-purple-600 mb-1.5">
                       Top Linguagens
-                    </h4>
+                    </h3>
                     <div className="flex flex-wrap gap-1">
                       {Object.entries(languages)
                         .sort(([, a], [, b]) => b - a)
@@ -342,7 +348,7 @@ export default function Home() {
                         .map(([lang, count]) => (
                           <span
                             key={lang}
-                            className="bg-purple-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full font-mono shadow-sm"
+                            className="bg-gray-900/50 backdrop-blur-sm text-white text-xs font-semibold px-2 py-0.5 rounded-full font-mono shadow-sm"
                           >
                             {lang} ({count})
                           </span>
@@ -357,53 +363,57 @@ export default function Home() {
       </div>
 
       {/* Right Side - Skills & Projects */}
-      <div className="flex-1 bg-slate-950 text-white flex flex-col justify-center px-4 sm:px-8 lg:px-12 py-4 lg:py-0 relative z-10">
-        <div className="max-w-lg">
+      <div className="flex-1 bg-slate-950 text-white flex flex-col justify-center px-4 sm:px-6 lg:px-8 xl:px-12 py-4 lg:py-6 relative z-10">
+        <div className="max-w-lg h-full flex flex-col">
           {/* Skills */}
-          <div className="mb-8 lg:mb-10">
-            <h3 className="text-lg text-purple-400 sm:text-xl font-light mb-4 sm:mb-6">
+          <div className="mb-6 lg:mb-8">
+            <h3 className="text-base text-purple-400 sm:text-lg font-light mb-3 sm:mb-4">
               Tecnologias
             </h3>
-            <div className="space-y-1 sm:space-y-2">
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0 p-2 rounded-lg bg-white/5 backdrop-blur-sm border border-slate-700/50">
-                <span className="font-mono text-gray-400 text-xs sm:text-sm">
+            <div className="space-y-1">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0 p-1.5 rounded-lg bg-white/5 backdrop-blur-sm border border-slate-700/50">
+                <span className="flex items-center font-mono text-gray-400 text-xs">
+                  <FaMobileScreen className="inline-block mr-1" />
                   Frontend
                 </span>
-                <span className="text-white text-xs sm:text-sm">
-                  React / Next.js / TypeScript
+                <span className="text-white text-xs">
+                  React • Next.js • Vite.js • Vue • Tailwind CSS
                 </span>
               </div>
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0 p-2 rounded-lg bg-white/5 backdrop-blur-sm border border-slate-700/50">
-                <span className="font-mono text-gray-400 text-xs sm:text-sm">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0 p-1.5 rounded-lg bg-white/5 backdrop-blur-sm border border-slate-700/50">
+                <span className="flex items-center font-mono text-gray-400 text-xs">
+                  <FaServer className="inline-block mr-1" />
                   Backend
                 </span>
-                <span className="text-white text-xs sm:text-sm">
-                  Node.js / Python / APIs
+                <span className="text-white text-xs">
+                  Node.js • Python • Typescript • Javascript • Express
                 </span>
               </div>
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0 p-2 rounded-lg bg-white/5 backdrop-blur-sm border border-slate-700/50">
-                <span className="font-mono text-gray-400 text-xs sm:text-sm">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0 p-1.5 rounded-lg bg-white/5 backdrop-blur-sm border border-slate-700/50">
+                <span className="flex items-center font-mono text-gray-400 text-xs">
+                  <FaDatabase className="inline-block mr-1" />
                   Database
                 </span>
-                <span className="text-white text-xs sm:text-sm">
-                  PostgreSQL / MongoDB
+                <span className="text-white text-xs">
+                  PostgreSQL • MySQL
                 </span>
               </div>
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0 p-2 rounded-lg bg-white/5 backdrop-blur-sm border border-slate-700/50">
-                <span className="font-mono text-gray-400 text-xs sm:text-sm">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0 p-1.5 rounded-lg bg-white/5 backdrop-blur-sm border border-slate-700/50">
+                <span className="flex items-center font-mono text-gray-400 text-xs">
+                  <FaCloud className="inline-block mr-1" />
                   Cloud
                 </span>
-                <span className="text-white text-xs sm:text-sm">
-                  AWS / Vercel / Docker
+                <span className="text-white text-xs">
+                  Digital Ocean • Vercel • Docker • Render • Containers • VMs
                 </span>
               </div>
             </div>
           </div>
 
           {/* Selected Projects */}
-          <div className="relative">
-            <div className="flex items-center justify-between mb-4 sm:mb-6">
-              <h3 className="text-lg text-purple-400 sm:text-xl font-light">
+          <div className="relative flex-1 flex flex-col min-h-0">
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
+              <h3 className="text-base text-purple-400 sm:text-lg font-light">
                 Do meu Github
               </h3>
               {/* Scroll indicator - only visible on desktop */}
@@ -416,14 +426,14 @@ export default function Home() {
             </div>
 
             {/* Scrollable container */}
-            <div className="lg:max-h-60 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800 space-y-3 sm:space-y-4 pr-2">
+            <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800 space-y-2 pr-2">
               {loading ? (
                 // Loading placeholder
                 <>
-                  {[...Array(5)].map((_, i) => (
+                  {[...Array(4)].map((_, i) => (
                     <div
                       key={i}
-                      className="border-l-2 border-slate-700 pl-2 sm:pl-3 p-2 rounded-lg bg-white/5 backdrop-blur-sm"
+                      className="border-l-2 border-slate-700 pl-2 p-1.5 rounded-lg bg-white/5 backdrop-blur-sm"
                     >
                       <div className="h-3 bg-slate-700 rounded mb-1 animate-pulse"></div>
                       <div className="h-2 bg-slate-700 rounded w-3/4 animate-pulse"></div>
@@ -437,37 +447,37 @@ export default function Home() {
                     href={repo.html_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block border-l-2 border-slate-700 hover:border-purple-400 pl-2 sm:pl-3 p-2 rounded-lg bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all group"
+                    className="block border-l-2 border-slate-700 hover:border-purple-400 pl-2 p-1.5 rounded-lg bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all group"
                   >
-                    <h4 className="text-rose-400 group-hover:text-rose-300 font-medium text-xs sm:text-sm transition-colors">
+                    <h4 className="text-rose-400 group-hover:text-rose-300 font-medium text-xs transition-colors">
                       {repo.name
                         .replace(/-/g, " ")
                         .replace(/\b\w/g, (l) => l.toUpperCase())}
                     </h4>
-                    <p className="text-gray-400 text-xs mb-1">
+                    <p className="text-gray-400 text-xs mb-1 leading-tight">
                       {repo.description
-                        ? repo.description.length > 150
-                          ? repo.description.substring(0, 150) + "..."
+                        ? repo.description.length > 120
+                          ? repo.description.substring(0, 120) + "..."
                           : repo.description
                         : "Projeto em desenvolvimento"}
                     </p>
-                    <div className="flex flex-wrap gap-1">
+                    <div className="flex flex-wrap gap-1 text-xs">
                       {repo.language && (
                         <>
-                          <span className="text-slate-400 text-xs">Lang:</span>
-                          <span className="text-slate-400 text-xs">
+                          <span className="text-slate-400">Lang:</span>
+                          <span className="text-slate-400">
                             {repo.language}
                           </span>
                         </>
                       )}
                     </div>
 
-                    <div className="flex flex-wrap gap-1">
+                    <div className="flex flex-wrap gap-1 text-xs">
                       {repo.topics.length > 0 && (
                         <>
-                          <span className="text-slate-400 text-xs">Tags:</span>
-                          <span className="text-slate-400 text-xs">
-                            {repo.topics.join(" • ")}
+                          <span className="text-slate-400">Tags:</span>
+                          <span className="text-slate-400">
+                            {repo.topics.slice(0, 3).join(" • ")}
                           </span>
                         </>
                       )}
@@ -476,19 +486,27 @@ export default function Home() {
                 ))
               )}
             </div>
-
-            {/* Bottom fade indicator */}
-            <div className="hidden lg:block absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-gray-900 via-gray-900/80 to-transparent pointer-events-none"></div>
           </div>
 
           {/* Footer */}
-          <div className="mt-8 sm:mt-10">
-            <p className="text-slate-400 text-xs font-mono">
-              © {year} Gael Gomes — Disponível para novos projetos e freelancer
-            </p>
+          <div className="mt-4 sm:mt-6 flex-shrink-0">
+            <div className="flex flex-col gap-2 sm:gap-1">
+              <FeedLinks className="justify-start" />
+              <p className="text-slate-400 text-xs font-mono">
+                © {year} Gael Gomes — Disponível para novos projetos e freelancer
+              </p>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Modal de Projetos */}
+      {modalOpen && (
+        <ProjetosModal 
+          isOpen={modalOpen} 
+          onClose={() => setModalOpen(false)} 
+        />
+      )}
     </div>
   );
 }

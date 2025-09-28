@@ -1,60 +1,82 @@
 import { NextResponse } from 'next/server'
-import { getAllPosts, getAllProjects } from '@/lib/content'
+
+interface GitHubRepo {
+  id: number;
+  name: string;
+  description: string | null;
+  language: string | null;
+  topics: string[];
+  html_url: string;
+  updated_at: string;
+  created_at: string;
+}
+
+async function getGitHubRepos(): Promise<GitHubRepo[]> {
+  try {
+    const response = await fetch(
+      'https://api.github.com/users/eugaelgomes/repos?sort=updated&per_page=20',
+      {
+        headers: {
+          'Accept': 'application/vnd.github.v3+json',
+          'User-Agent': 'gaelgomes.dev'
+        }
+      }
+    );
+    
+    if (!response.ok) {
+      throw new Error(`GitHub API error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    // Filtra apenas repos públicos com descrição
+    return data.filter((repo: GitHubRepo) => 
+      !repo.name.includes('.github') && 
+      repo.description && 
+      repo.description.length > 10
+    );
+  } catch (error) {
+    console.error('Erro ao buscar repositórios:', error);
+    return [];
+  }
+}
 
 export async function GET() {
-  const posts = getAllPosts()
-  const projects = getAllProjects()
+  const repos = await getGitHubRepos();
   
   const baseUrl = 'https://gaelgomes.dev'
   
-  const feedItems = [
-    // Posts do blog
-    ...posts.map(post => ({
-      id: `${baseUrl}/blog/${post.slug}`,
-      url: `${baseUrl}/blog/${post.slug}`,
-      title: post.title,
-      content_html: post.content,
-      content_text: post.description,
-      summary: post.description,
-      date_published: post.publishedAt.toISOString(),
-      date_modified: post.updatedAt.toISOString(),
-      author: {
-        name: post.author.name,
-        email: post.author.email,
-        url: post.author.url
-      },
-      tags: ['blog', ...post.tags]
-    })),
-    
-    // Projetos
-    ...projects.map(project => ({
-      id: `${baseUrl}/projetos/${project.slug}`,
-      url: `${baseUrl}/projetos/${project.slug}`,
-      title: `Projeto: ${project.title}`,
-      content_html: project.content,
-      content_text: project.description,
-      summary: project.description,
-      date_published: project.publishedAt.toISOString(),
-      date_modified: project.updatedAt.toISOString(),
-      author: {
-        name: 'Gael Gomes',
-        email: 'hello@gaelgomes.dev',
-        url: 'https://gaelgomes.dev'
-      },
-      tags: ['projetos', ...project.technologies],
-      external_url: project.liveUrl,
-      _github_url: project.githubUrl
-    }))
-  ]
+  const feedItems = repos.map(repo => ({
+    id: repo.html_url,
+    url: repo.html_url,
+    title: repo.name.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+    content_html: `<p>${repo.description}</p><p><strong>Linguagem:</strong> ${repo.language || 'N/A'}</p><p><strong>Tags:</strong> ${repo.topics.join(', ')}</p>`,
+    content_text: repo.description || 'Projeto no GitHub',
+    summary: repo.description || 'Projeto no GitHub',
+    date_published: new Date(repo.created_at).toISOString(),
+    date_modified: new Date(repo.updated_at).toISOString(),
+    author: {
+      name: 'Gael Gomes',
+      email: 'hello@gaelgomes.dev',
+      url: 'https://gaelgomes.dev'
+    },
+    tags: ['projetos', 'github', repo.language, ...repo.topics].filter(Boolean),
+    external_url: repo.html_url,
+    _github: {
+      id: repo.id,
+      language: repo.language,
+      topics: repo.topics
+    }
+  }))
 
   const feed = {
     version: 'https://jsonfeed.org/version/1.1',
-    title: 'Gael Gomes - Desenvolvedor Full Stack',
-    description: 'Blog e projetos de Gael Gomes, desenvolvedor full stack especializado em React, Next.js, Node.js e tecnologias modernas.',
+    title: 'Gael Gomes - Projetos e Repositórios',
+    description: 'Projetos e repositórios de Gael Gomes, desenvolvedor full stack especializado em React, Next.js, Node.js e tecnologias modernas.',
     home_page_url: baseUrl,
     feed_url: `${baseUrl}/feed.json`,
     language: 'pt-BR',
-    icon: `${baseUrl}/og-image.png`,
+    icon: `${baseUrl}/profile_picture-gael_gomes.webp`,
     favicon: `${baseUrl}/favicon.ico`,
     authors: [
       {
@@ -64,7 +86,7 @@ export async function GET() {
       }
     ],
     items: feedItems.sort((a, b) => 
-      new Date(b.date_published).getTime() - new Date(a.date_published).getTime()
+      new Date(b.date_modified).getTime() - new Date(a.date_modified).getTime()
     )
   }
 

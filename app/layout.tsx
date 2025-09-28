@@ -45,6 +45,14 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://gaelgomes.dev"),
   alternates: {
     canonical: "/",
+    types: {
+      'application/rss+xml': [
+        { url: '/rss.xml', title: 'Gael Gomes - RSS Feed' },
+      ],
+      'application/feed+json': [
+        { url: '/feed.json', title: 'Gael Gomes - JSON Feed' },
+      ],
+    },
   },
   icons: {
     icon: [

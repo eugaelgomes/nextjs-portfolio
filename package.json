@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "validate-feeds": "node scripts/validate-feeds.js",
+    "check-seo": "npm run validate-feeds"
   },
   "dependencies": {
     "next": "15.5.4",

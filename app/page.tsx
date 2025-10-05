@@ -4,16 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
-import { FaLinkedinIn } from "react-icons/fa";
-import { FaGithub } from "react-icons/fa";
+import { FaLinkedinIn, FaProjectDiagram,  FaGithub, FaDatabase, FaCloud } from "react-icons/fa";
+import { FaFilePdf, FaMobileScreen, FaServer } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
-import { FaFilePdf } from "react-icons/fa6";
-//import { FaProjectDiagram } from "react-icons/fa";
-import { FaMobileScreen } from "react-icons/fa6";
-import { FaServer } from "react-icons/fa6";
-import { FaDatabase } from "react-icons/fa";
-import { FaCloud } from "react-icons/fa";
-import ProjetosModal from "./modals/projetos";
+
+import ProjetosModal from "./modals/projects";
 import FeedLinks from "../components/FeedLinks";
 
 // Tipos para as stats do GitHub
@@ -110,7 +105,7 @@ const useGitHubStats = (username: string) => {
   return { stats, languages, loading };
 };
 
-export default function Home() {
+const Home = () => {
   const [modalOpen, setModalOpen] = useState(false);
   // Busca os repositórios do GitHub
   const { repos, loading } = useGitHubRepos("eugaelgomes");
@@ -140,41 +135,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen lg:h-screen bg-black overflow-hidden flex flex-col lg:flex-row relative">
-      {/* TV Static Effect */}
-      <div 
-        className="absolute inset-0 opacity-[0.03] pointer-events-none z-0"
-        style={{
-          backgroundImage: `repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 2px,
-            rgba(255,255,255,0.03) 2px,
-            rgba(255,255,255,0.03) 4px
-          ),
-          repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 2px,
-            rgba(255,255,255,0.03) 2px,
-            rgba(255,255,255,0.03) 4px
-          )`,
-          animation: 'tvNoise 0.15s infinite linear'
-        }}
-      />
-      
-      {/* Scanlines */}
-      <div 
-        className="absolute inset-0 opacity-[0.02] pointer-events-none z-0"
-        style={{
-          background: `repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 2px,
-            rgba(0,255,0,0.03) 2px,
-            rgba(0,255,0,0.03) 4px
-          )`
-        }}
-      />
 
       {/* Left Side - Main Content */}
       <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-8 xl:px-12 py-4 lg:py-6 relative z-10">
@@ -205,10 +165,10 @@ export default function Home() {
           </div>
 
           <p className="text-xs sm:text-sm text-justify text-gray-200 mb-3 sm:mb-4 leading-relaxed">
-            Sou curioso, autodidata e movido a café e código ☕💻. Curso
-            Engenharia de Software com foco em frontend, backend e elaboração de
-            requisitos de projetos. Já desenvolvi projetos pessoais que simulam
-            aplicações do mundo real e adoro transformar ideias em interfaces
+            Curioso, autodidata e movido a café e código ☕💻. Curso
+            Engenharia de Software com foco em desenvolvimento full-stack e elaboração de
+            requisitos de projetos. Sempre estou criando projetos pessoais que simulam
+            aplicações do mundo real e gosto de transformar ideias em interfaces
             funcionais. Cada dia é uma nova oportunidade para aprender!
           </p>
 
@@ -253,8 +213,8 @@ export default function Home() {
               className="text-gray-200 hover:text-purple-400 transition-colors border-b border-gray-600 hover:border-purple-400 text-xs flex items-center"
               title="Abrir modal com meus projetos"
             >
-              {/*<FaProjectDiagram className="inline-block mr-1 text-sm" />
-              Meus Projetos*/}
+              <FaProjectDiagram className="inline-block mr-1 text-sm" />
+              Meus Projetos
             </button>
           </div>
 
@@ -306,7 +266,7 @@ export default function Home() {
                       {stats.public_repos}
                     </div>
                     <div className="text-xs text-gray-300 font-mono">
-                      Repos
+                      Repositórios
                     </div>
                   </div>
                   <div className="text-center bg-gray-900/50 backdrop-blur-sm rounded-lg p-1.5 border border-gray-900">
@@ -493,7 +453,7 @@ export default function Home() {
             <div className="flex flex-col gap-2 sm:gap-1">
               <FeedLinks className="justify-start" />
               <p className="text-slate-400 text-xs font-mono">
-                © {year} Gael Gomes — Disponível para novos projetos e freelancer
+                © {year} Gael Gomes
               </p>
             </div>
           </div>
@@ -510,3 +470,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

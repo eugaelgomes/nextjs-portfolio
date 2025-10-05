@@ -450,7 +450,7 @@ const Home = () => {
 
           {/* Footer */}
           <div className="mt-4 sm:mt-6 flex-shrink-0">
-            <div className="flex flex-col gap-2 sm:gap-1">
+            <div className="flex gap-50 sm:gap-8 items-center">
               <FeedLinks className="justify-start" />
               <p className="text-slate-400 text-xs font-mono">
                 © {year} Gael Gomes

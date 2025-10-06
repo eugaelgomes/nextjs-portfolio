@@ -1,9 +1,8 @@
-
-
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaStar, FaCodeBranch, FaExternalLinkAlt } from "react-icons/fa";
 
+// Tipo para os dados do repositório 
 interface GitHubRepo {
   id: number;
   name: string;

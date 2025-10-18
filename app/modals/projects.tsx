@@ -83,10 +83,8 @@ const ProjetosModal: React.FC<ProjetosModalProps> = ({ isOpen, onClose }) => {
     }
   };
 
-  // Extrai todas as tags únicas dos repositórios
-  const allTags = Array.from(
-    new Set(repos.flatMap(repo => repo.topics))
-  ).sort();
+  // Tags padrão definidas
+  const defaultTags = ["frontend", "backend", "fullstack","database", "cloud", "devops"];
 
   // Filtra repositórios por tag e termo de busca
   const filteredRepos = repos.filter(repo => {
@@ -110,11 +108,11 @@ const ProjetosModal: React.FC<ProjetosModalProps> = ({ isOpen, onClose }) => {
       className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
       onClick={handleBackdropClick}
     >
-      <div className="bg-gray-900 border border-gray-700 rounded-lg max-w-[90vw] w-full max-h-[90vh] overflow-hidden flex flex-col">
+      <div className="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg max-w-[90vw] w-full max-h-[90vh] overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-700">
+        <div className="flex items-center justify-between p-4 border-b border-gray-300 dark:border-gray-700">
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-light text-gray-100">
+            <h2 className="text-xl font-light text-gray-900 dark:text-gray-100">
               <Link href="https://github.com/eugaelgomes" target="_blank" rel="noopener noreferrer">
                 @eugaelgomes
               </Link>
@@ -125,14 +123,14 @@ const ProjetosModal: React.FC<ProjetosModalProps> = ({ isOpen, onClose }) => {
           </div>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-white transition-colors text-2xl leading-none"
+            className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-2xl leading-none"
           >
             ×
           </button>
         </div>
 
         {/* Filtros */}
-        <div className="p-4 border-b border-gray-700 space-y-3">
+        <div className="p-4 border-b border-gray-300 dark:border-gray-700 space-y-3">
           {/* Busca */}
           <div>
             <input
@@ -140,7 +138,7 @@ const ProjetosModal: React.FC<ProjetosModalProps> = ({ isOpen, onClose }) => {
               placeholder="Buscar por nome ou descrição..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:border-purple-500"
+              className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:border-purple-500"
             />
           </div>
 
@@ -148,15 +146,15 @@ const ProjetosModal: React.FC<ProjetosModalProps> = ({ isOpen, onClose }) => {
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setSelectedTag("all")}
-              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+              className={`px-3 py-1 rounded-full text-xs font-bold transition-colors ${
                 selectedTag === "all"
                   ? "bg-purple-600 text-white"
-                  : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  : "bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700"
               }`}
             >
               Todos ({repos.length})
             </button>
-            {allTags.map(tag => {
+            {defaultTags.map(tag => {
               const count = repos.filter(repo => repo.topics.includes(tag)).length;
               return (
                 <button
@@ -165,7 +163,7 @@ const ProjetosModal: React.FC<ProjetosModalProps> = ({ isOpen, onClose }) => {
                   className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                     selectedTag === tag
                       ? "bg-purple-600 text-white"
-                      : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                      : "bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700"
                   }`}
                 >
                   {tag} ({count})
@@ -180,12 +178,12 @@ const ProjetosModal: React.FC<ProjetosModalProps> = ({ isOpen, onClose }) => {
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="bg-gray-800 rounded-lg p-4 animate-pulse">
-                  <div className="h-4 bg-gray-700 rounded mb-2"></div>
-                  <div className="h-3 bg-gray-700 rounded w-3/4 mb-3"></div>
+                <div key={i} className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 animate-pulse">
+                  <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded mb-2"></div>
+                  <div className="h-3 bg-gray-300 dark:bg-gray-700 rounded w-3/4 mb-3"></div>
                   <div className="flex gap-2">
-                    <div className="h-2 bg-gray-700 rounded w-16"></div>
-                    <div className="h-2 bg-gray-700 rounded w-12"></div>
+                    <div className="h-2 bg-gray-300 dark:bg-gray-700 rounded w-16"></div>
+                    <div className="h-2 bg-gray-300 dark:bg-gray-700 rounded w-12"></div>
                   </div>
                 </div>
               ))}
@@ -193,27 +191,27 @@ const ProjetosModal: React.FC<ProjetosModalProps> = ({ isOpen, onClose }) => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {filteredRepos.map(repo => (
-                <div key={repo.id} className="bg-gray-800 rounded-lg p-4 hover:bg-gray-750 transition-colors border border-gray-700">
+                <div key={repo.id} className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 hover:bg-gray-200 dark:hover:bg-gray-750 transition-colors border border-gray-300 dark:border-gray-700">
                   <div className="flex items-start justify-between mb-2">
-                    <h3 className="text-lg font-medium text-purple-400 truncate">
+                    <h3 className="text-lg font-medium text-purple-600 dark:text-purple-400 truncate">
                       {repo.name.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase())}
                     </h3>
                     <Link
                       href={repo.html_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-purple-400 transition-colors"
+                      className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
                     >
                       <FaExternalLinkAlt size={16} />
                     </Link>
                   </div>
 
-                  <p className="text-gray-300 text-sm mb-3 leading-tight">
+                  <p className="text-gray-700 dark:text-gray-300 text-sm mb-3 leading-tight">
                     {repo.description || "Sem descrição disponível"}
                   </p>
 
                   {/* Estatísticas */}
-                  <div className="flex items-center gap-4 mb-3 text-xs text-gray-400">
+                  <div className="flex items-center gap-4 mb-3 text-xs text-gray-600 dark:text-gray-400">
                     {repo.language && (
                       <span className="flex items-center gap-1">
                         <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
@@ -236,20 +234,20 @@ const ProjetosModal: React.FC<ProjetosModalProps> = ({ isOpen, onClose }) => {
                       {repo.topics.slice(0, 5).map(topic => (
                         <span
                           key={topic}
-                          className="bg-gray-700 text-gray-300 text-xs px-2 py-0.5 rounded-full"
+                          className="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs px-2 py-0.5 rounded-full"
                         >
                           {topic}
                         </span>
                       ))}
                       {repo.topics.length > 5 && (
-                        <span className="text-gray-400 text-xs">
+                        <span className="text-gray-600 dark:text-gray-400 text-xs">
                           +{repo.topics.length - 5}
                         </span>
                       )}
                     </div>
                   )}
 
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-gray-500 dark:text-gray-500">
                     Atualizado em {formatDate(repo.updated_at)}
                   </p>
                 </div>
@@ -259,7 +257,7 @@ const ProjetosModal: React.FC<ProjetosModalProps> = ({ isOpen, onClose }) => {
 
           {!loading && filteredRepos.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-gray-400">Nenhum repositório encontrado com os filtros aplicados.</p>
+              <p className="text-gray-600 dark:text-gray-400">Nenhum repositório encontrado com os filtros aplicados.</p>
             </div>
           )}
         </div>

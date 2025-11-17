@@ -159,7 +159,7 @@ const Home = () => {
                 Gael Gomes
               </h1>
               <h2 className="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300 font-mono">
-                Desenvolvedor Full Stack, {calculateAge()} anos
+                Estudante Full Stack, {calculateAge()} anos
               </h2>
             </div>
           </div>

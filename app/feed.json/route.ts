@@ -72,7 +72,7 @@ export async function GET() {
   const feed = {
     version: 'https://jsonfeed.org/version/1.1',
     title: 'Gael Gomes - Projetos e Repositórios',
-    description: 'Projetos e repositórios de Gael Gomes, desenvolvedor full stack especializado em React, Next.js, Node.js e tecnologias modernas.',
+    description: 'Projetos e repositórios de Gael Gomes, Estudante full stack especializado em React, Next.js, Node.js e tecnologias modernas.',
     home_page_url: baseUrl,
     feed_url: `${baseUrl}/feed.json`,
     language: 'pt-BR',

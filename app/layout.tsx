@@ -14,24 +14,24 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Gael Gomes - Desenvolvedor Full Stack | Portfólio",
+    default: "Gael Gomes - Estudante Full Stack | Portfólio",
     template: "%s | Gael Gomes"
   },
-  description: "Desenvolvedor Full Stack especializado em React, Next.js, Node.js e soluções digitais modernas. Transformo ideias em aplicações web elegantes e funcionais. 21 anos, Engenharia de Software.",
+  description: "Estudante Full Stack especializado em React, Next.js, Node.js e soluções digitais modernas. Transformo ideias em aplicações web elegantes e funcionais. 21 anos, Engenharia de Software.",
   keywords: [
     "Gael Gomes",
-    "Desenvolvedor Full Stack",
+    "Estudante Full Stack",
     "React",
     "Next.js",
     "Node.js",
     "TypeScript",
     "JavaScript",
-    "Desenvolvedor Web",
+    "Estudante Web",
     "Frontend",
     "Backend",
     "Portfolio",
     "Engenharia de Software",
-    "Desenvolvedor Brasil",
+    "Estudante Brasil",
     "Web Developer"
   ],
   authors: [{ name: "Gael Gomes", url: "https://gaelgomes.dev" }],
@@ -72,23 +72,23 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     url: "https://gaelgomes.dev",
-    siteName: "Gael Gomes - Desenvolvedor Full Stack",
-    title: "Gael Gomes - Desenvolvedor Full Stack | Portfólio",
-    description: "Desenvolvedor Full Stack especializado em React, Next.js, Node.js e soluções digitais modernas. Transformo ideias em aplicações web elegantes e funcionais.",
+    siteName: "Gael Gomes - Estudante Full Stack",
+    title: "Gael Gomes - Estudante Full Stack | Portfólio",
+    description: "Estudante Full Stack especializado em React, Next.js, Node.js e soluções digitais modernas. Transformo ideias em aplicações web elegantes e funcionais.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Gael Gomes - Desenvolvedor Full Stack",
+        alt: "Gael Gomes - Estudante Full Stack",
         type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gael Gomes - Desenvolvedor Full Stack | Portfólio",
-    description: "Desenvolvedor Full Stack especializado em React, Next.js, Node.js e soluções digitais modernas. Transformo ideias em aplicações web elegantes e funcionais.",
+    title: "Gael Gomes - Estudante Full Stack | Portfólio",
+    description: "Estudante Full Stack especializado em React, Next.js, Node.js e soluções digitais modernas. Transformo ideias em aplicações web elegantes e funcionais.",
     images: ["/og-image.png"],
     creator: "@gaelgomes", // Substitua pelo seu Twitter se tiver
   },

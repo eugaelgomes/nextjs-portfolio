@@ -4,7 +4,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
-import { FaLinkedinIn, FaProjectDiagram,  FaGithub, FaDatabase, FaCloud } from "react-icons/fa";
+import {
+  FaLinkedinIn,
+  FaProjectDiagram,
+  FaGithub,
+  FaDatabase,
+  FaCloud,
+} from "react-icons/fa";
 import { FaFilePdf, FaMobileScreen, FaServer } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 
@@ -135,7 +141,6 @@ const Home = () => {
 
   return (
     <div className="min-h-screen lg:h-screen bg-white dark:bg-gray-900 overflow-hidden flex flex-col lg:flex-row relative">
-
       {/* Left Side - Main Content */}
       <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-8 xl:px-12 py-4 lg:py-6 relative z-10">
         <div className="max-w-xl">
@@ -159,17 +164,17 @@ const Home = () => {
                 Gael Gomes
               </h1>
               <h2 className="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300 font-mono">
-                Estudante Full Stack, {calculateAge()} anos
+                Estudante Eng. de Software, {calculateAge()} anos
               </h2>
             </div>
           </div>
 
           <p className="text-xs sm:text-sm text-justify text-gray-700 dark:text-gray-200 mb-3 sm:mb-4 leading-relaxed">
-            Curioso, autodidata e movido a café e código ☕💻. Curso
-            Engenharia de Software com foco em desenvolvimento full-stack e elaboração de
-            requisitos de projetos. Sempre estou criando projetos pessoais que simulam
-            aplicações do mundo real e gosto de transformar ideias em interfaces
-            funcionais. Cada dia é uma nova oportunidade para aprender!
+            Curioso, autodidata e movido a café e código ☕💻. Sou Graduando em
+            Engenharia de Software com foco em desenvolvimento full-stack e IA.
+            Tô sempre criando, reciclando e fazendo novos projetos dev com viés
+            de aprendizado. Colocando em prática, ou, aprendendo com a prática as
+            stacks e ferramentas.
           </p>
 
           {/* Contact Links */}
@@ -228,7 +233,9 @@ const Home = () => {
                 <h4 className="text-gray-800 dark:text-gray-200 font-semibold text-xs">
                   Engenharia de Software
                 </h4>
-                <p className="text-gray-600 dark:text-gray-300 text-xs">FBV • 2024 - 2028 | {"cursando"}</p>
+                <p className="text-gray-600 dark:text-gray-300 text-xs">
+                  FBV • 2024 - 2028 | {"cursando"}
+                </p>
               </div>
               <div className="border-l-2 border-purple-500 pl-2">
                 <h4 className="text-gray-800 dark:text-gray-200 font-semibold text-xs">
@@ -424,7 +431,9 @@ const Home = () => {
                     <div className="flex flex-wrap gap-1 text-xs">
                       {repo.language && (
                         <>
-                          <span className="text-gray-600 dark:text-slate-400">Lang:</span>
+                          <span className="text-gray-600 dark:text-slate-400">
+                            Lang:
+                          </span>
                           <span className="text-gray-600 dark:text-slate-400">
                             {repo.language}
                           </span>
@@ -435,7 +444,9 @@ const Home = () => {
                     <div className="flex flex-wrap gap-1 text-xs">
                       {repo.topics.length > 0 && (
                         <>
-                          <span className="text-gray-600 dark:text-slate-400">Tags:</span>
+                          <span className="text-gray-600 dark:text-slate-400">
+                            Tags:
+                          </span>
                           <span className="text-gray-600 dark:text-slate-400">
                             {repo.topics.slice(0, 3).join(" • ")}
                           </span>
@@ -462,13 +473,10 @@ const Home = () => {
 
       {/* Modal de Projetos */}
       {modalOpen && (
-        <ProjetosModal 
-          isOpen={modalOpen} 
-          onClose={() => setModalOpen(false)} 
-        />
+        <ProjetosModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
       )}
     </div>
   );
-}
+};
 
 export default Home;

@@ -68,7 +68,7 @@ export async function GET() {
      xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Gael Gomes - Projetos e Repositórios</title>
-    <description>Projetos e repositórios de Gael Gomes, Estudante full stack especializado em React, Next.js, Node.js e tecnologias modernas.</description>
+    <description>Projetos e repositórios de Gael Gomes, Estudante de Engenharia de Software com foco em React, Next.js, Node.js e tecnologias modernas.</description>
     <link>${baseUrl}</link>
     <atom:link href="${baseUrl}/rss.xml" rel="self" type="application/rss+xml"/>
     <language>pt-BR</language>

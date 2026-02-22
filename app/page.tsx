@@ -170,11 +170,11 @@ const Home = () => {
           </div>
 
           <p className="text-xs sm:text-sm text-justify text-gray-700 dark:text-gray-200 mb-3 sm:mb-4 leading-relaxed">
-            Curioso, autodidata e movido a café e código ☕💻. Sou Graduando em
-            Engenharia de Software com foco em desenvolvimento full-stack e IA.
-            Tô sempre criando, reciclando e fazendo novos projetos dev com viés
-            de aprendizado. Colocando em prática, ou, aprendendo com a prática as
-            stacks e ferramentas.
+            Curioso, tento ser autodidata e movido a café e código ☕💻. 
+            Graduando em Engenharia de Software, Analista de Prompt/CS em uma HR Tech e estudos 
+            com foco em desenvolvimento full-stack e IA. Tô sempre criando, 
+            reciclando e fazendo novos projetos devs com viés de aprendizado. 
+            Colocando em prática, ou, aprendendo com a prática as stacks e ferramentas.
           </p>
 
           {/* Contact Links */}

@@ -43,14 +43,14 @@ const useGitHubRepos = (username: string) => {
     const fetchRepos = async () => {
       try {
         const response = await fetch(
-          `https://api.github.com/users/${username}/repos?sort=updated&per_page=6`
+          `https://api.github.com/users/${username}/repos?sort=updated&per_page=6`,
         );
         const data = await response.json();
 
         // Filtra apenas repos públicos e com descrição
         const filteredRepos = data.filter(
           (repo: GitHubRepo) =>
-            !repo.name.includes(".github") && repo.description
+            !repo.name.includes(".github") && repo.description,
         ); // Remove slice - mostra todos
 
         setRepos(filteredRepos);
@@ -78,14 +78,14 @@ const useGitHubStats = (username: string) => {
       try {
         // Busca dados do usuário
         const userResponse = await fetch(
-          `https://api.github.com/users/${username}`
+          `https://api.github.com/users/${username}`,
         );
         const userData = await userResponse.json();
         setStats(userData);
 
         // Busca repositórios para calcular linguagens
         const reposResponse = await fetch(
-          `https://api.github.com/users/${username}/repos?per_page=100`
+          `https://api.github.com/users/${username}/repos?per_page=100`,
         );
         const reposData = await reposResponse.json();
 
@@ -145,7 +145,7 @@ const Home = () => {
       <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-8 xl:px-12 py-4 lg:py-6 relative z-10">
         <div className="max-w-xl">
           {/* Profile Section */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+          <div className="flex flex-row items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
             {/* Profile Picture */}
             <div className="flex-shrink-0">
               <Image
@@ -170,11 +170,12 @@ const Home = () => {
           </div>
 
           <p className="text-xs sm:text-sm text-justify text-gray-700 dark:text-gray-200 mb-3 sm:mb-4 leading-relaxed">
-            Curioso, tento ser autodidata e movido a café e código ☕💻. 
-            Graduando em Engenharia de Software, Analista de Prompt/CS em uma HR Tech e estudos 
-            com foco em desenvolvimento full-stack e IA. Tô sempre criando, 
-            reciclando e fazendo novos projetos devs com viés de aprendizado. 
-            Colocando em prática, ou, aprendendo com a prática as stacks e ferramentas.
+            Curioso, tento ser autodidata e movido a café e código ☕💻.
+            Graduando em Engenharia de Software, Analista de Prompt/CS em uma HR
+            Tech e estudos com foco em desenvolvimento full-stack e IA. Tô
+            sempre criando, reciclando e fazendo novos projetos devs com viés de
+            aprendizado. Colocando em prática, ou, aprendendo com a prática as
+            stacks e ferramentas.
           </p>
 
           {/* Contact Links */}
@@ -335,7 +336,7 @@ const Home = () => {
           {/* Skills */}
           <div className="mb-6 lg:mb-8">
             <h3 className="text-base text-purple-600 dark:text-purple-400 sm:text-lg font-light mb-2 sm:mb-3">
-              Tecnologias
+              Stacks
             </h3>
             <div className="space-y-1">
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0 p-1.5 rounded-lg bg-gray-900/5 dark:bg-white/5 backdrop-blur-sm border border-gray-300/50 dark:border-slate-700/50">
@@ -381,7 +382,7 @@ const Home = () => {
           <div className="relative flex-1 flex flex-col min-h-0">
             <div className="flex items-center justify-between mb-2 sm:mb-3">
               <h3 className="text-base text-purple-600 dark:text-purple-400 sm:text-lg font-light">
-                Do meu Github
+                Repositórios / Projetos Públicos
               </h3>
               {/* Scroll indicator - only visible on desktop */}
               <div className="hidden lg:flex items-center text-gray-600 dark:text-slate-400 text-xs">

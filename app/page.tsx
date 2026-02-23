@@ -140,10 +140,10 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen lg:h-screen bg-white dark:bg-gray-900 overflow-hidden flex flex-col lg:flex-row relative">
+    <div className="min-h-screen lg:h-screen bg-white dark:bg-gray-900 overflow-x-hidden overflow-y-auto lg:overflow-hidden flex flex-col lg:flex-row relative">
       {/* Left Side - Main Content */}
-      <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-8 xl:px-12 py-4 lg:py-6 relative z-10">
-        <div className="max-w-xl">
+      <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-8 xl:px-16 2xl:px-24 py-4 lg:py-6 relative z-10">
+        <div className="max-w-xl xl:max-w-2xl 2xl:max-w-3xl">
           {/* Profile Section */}
           <div className="flex flex-row items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
             {/* Profile Picture */}
@@ -153,23 +153,23 @@ const Home = () => {
                 alt="Gael Gomes"
                 width={100}
                 height={100}
-                className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-lg object-cover outline-2 outline-purple-600"
+                className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 xl:w-22 xl:h-22 2xl:w-24 2xl:h-24 rounded-lg object-cover outline-2 outline-purple-600"
                 priority
               />
             </div>
 
             {/* Name and Title */}
             <div className="flex-1">
-              <h1 className="text-xl sm:text-2xl lg:text-3xl font-light text-gray-900 dark:text-gray-100 mb-1">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-3xl 2xl:text-4xl font-light text-gray-900 dark:text-gray-100 mb-1">
                 Gael Gomes
               </h1>
-              <h2 className="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300 font-mono">
+              <h2 className="text-xs sm:text-sm lg:text-base xl:text-base 2xl:text-lg text-gray-600 dark:text-gray-300 font-mono">
                 Estudante Eng. de Software, {calculateAge()} anos
               </h2>
             </div>
           </div>
 
-          <p className="text-xs sm:text-sm text-justify text-gray-700 dark:text-gray-200 mb-3 sm:mb-4 leading-relaxed">
+          <p className="text-xs sm:text-sm xl:text-sm 2xl:text-base text-justify text-gray-700 dark:text-gray-200 mb-3 sm:mb-4 xl:mb-5 leading-relaxed">
             Curioso, tento ser autodidata e movido a café e código ☕💻.
             Graduando em Engenharia de Software, Analista de Prompt/CS em uma HR
             Tech e estudos com foco em desenvolvimento full-stack e IA. Tô
@@ -179,70 +179,69 @@ const Home = () => {
           </p>
 
           {/* Contact Links */}
-          <div className="flex gap-2 sm:gap-3 flex-wrap mb-3 sm:mb-4">
+          <div className="flex gap-2 sm:gap-3 xl:gap-3 flex-wrap mb-3 sm:mb-4 xl:mb-5">
             <Link
               href="mailto:hello@gaelgomes.dev"
               className="text-gray-600 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 transition-colors border-b border-gray-400 dark:border-gray-600 hover:border-purple-600 dark:hover:border-purple-400 text-xs flex items-center"
             >
-              <MdEmail className="inline-block mr-1 text-sm" />
+              <MdEmail className="inline-block mr-1 text-sm xl:text-base" />
               Email
             </Link>
             <Link
               href="https://github.com/eugaelgomes"
-              className="text-gray-600 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 transition-colors border-b border-gray-400 dark:border-gray-600 hover:border-purple-600 dark:hover:border-purple-400 text-xs flex items-center"
+              className="text-gray-600 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 transition-colors border-b border-gray-400 dark:border-gray-600 hover:border-purple-600 dark:hover:border-purple-400 text-xs xl:text-sm flex items-center"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaGithub className="inline-block mr-1 text-sm" />
+              <FaGithub className="inline-block mr-1 text-sm xl:text-base" />
               GitHub
             </Link>
             <Link
               href="https://linkedin.com/in/gael-rene-gomes/"
-              className="text-gray-600 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 transition-colors border-b border-gray-400 dark:border-gray-600 hover:border-purple-600 dark:hover:border-purple-400 text-xs flex items-center"
+              className="text-gray-600 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 transition-colors border-b border-gray-400 dark:border-gray-600 hover:border-purple-600 dark:hover:border-purple-400 text-xs xl:text-sm flex items-center"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaLinkedinIn className="inline-block mr-1 text-sm" />
+              <FaLinkedinIn className="inline-block mr-1 text-sm xl:text-base" />
               LinkedIn
             </Link>
-            <Link
-              href="https://drive.google.com/drive/folders/18-vSkqabL7tgtjnjxL2HhBNQ1hSUngbK?usp=sharing"
-              className="text-gray-600 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 transition-colors border-b border-gray-400 dark:border-gray-600 hover:border-purple-600 dark:hover:border-purple-400 text-xs flex items-center"
-              target="_blank"
-              rel="noopener noreferrer"
+            <a
+              href="/cv_gael-rene-gomes-silva.pdf"
+              download="cv_gael-rene-gomes-silva.pdf"
+              className="text-gray-600 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 transition-colors border-b border-gray-400 dark:border-gray-600 hover:border-purple-600 dark:hover:border-purple-400 text-xs xl:text-sm flex items-center"
             >
-              <FaFilePdf className="inline-block mr-1 text-sm" />
+              <FaFilePdf className="inline-block mr-1 text-sm xl:text-base" />
               Currículo
-            </Link>
+            </a>
             <button
               onClick={() => setModalOpen(true)}
-              className="text-gray-600 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 transition-colors border-b border-gray-400 dark:border-gray-600 hover:border-purple-600 dark:hover:border-purple-400 text-xs flex items-center"
+              className="text-gray-600 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 transition-colors border-b border-gray-400 dark:border-gray-600 hover:border-purple-600 dark:hover:border-purple-400 text-xs xl:text-sm flex items-center"
               title="Abrir modal com meus projetos"
             >
-              <FaProjectDiagram className="inline-block mr-1 text-sm" />
+              <FaProjectDiagram className="inline-block mr-1 text-sm xl:text-base" />
               Meus Projetos
             </button>
           </div>
 
           {/* Education Section */}
           <div className="mb-3 sm:mb-4">
-            <h3 className="text-sm sm:text-base font-light text-purple-600 dark:text-purple-400 mb-2">
+            <h3 className="text-sm sm:text-base xl:text-base 2xl:text-lg font-light text-purple-600 dark:text-purple-400 mb-2">
               Formação
             </h3>
             <div className="space-y-1 sm:space-y-1.5">
               <div className="border-l-2 border-purple-500 pl-2">
-                <h4 className="text-gray-800 dark:text-gray-200 font-semibold text-xs">
+                <h4 className="text-gray-800 dark:text-gray-200 font-semibold text-xs xl:text-sm">
                   Engenharia de Software
                 </h4>
-                <p className="text-gray-600 dark:text-gray-300 text-xs">
+                <p className="text-gray-600 dark:text-gray-300 text-xs xl:text-sm">
                   FBV • 2024 - 2028 | {"cursando"}
                 </p>
               </div>
               <div className="border-l-2 border-purple-500 pl-2">
-                <h4 className="text-gray-800 dark:text-gray-200 font-semibold text-xs">
+                <h4 className="text-gray-800 dark:text-gray-200 font-semibold text-xs xl:text-sm">
                   Técnico em Desenvolvimento de Sistemas
                 </h4>
-                <p className="text-gray-600 dark:text-gray-300 text-xs">
+                <p className="text-gray-600 dark:text-gray-300 text-xs xl:text-sm">
                   Escola Técnico Advogado Gil Rodrigues • 2020 - 2022
                 </p>
               </div>
@@ -251,7 +250,7 @@ const Home = () => {
 
           {/* GitHub Stats */}
           <div className="mt-3 sm:mt-4">
-            <h3 className="text-sm sm:text-base font-light text-purple-600 dark:text-purple-400 mb-2">
+            <h3 className="text-sm sm:text-base xl:text-base 2xl:text-lg font-light text-purple-600 dark:text-purple-400 mb-2">
               GitHub Stats
             </h3>
 
@@ -270,34 +269,34 @@ const Home = () => {
                 {/* Stats Numbers */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 mb-3">
                   <div className="text-center bg-gray-100/80 dark:bg-gray-900/50 backdrop-blur-sm rounded-lg p-1.5 border border-gray-200 dark:border-gray-500">
-                    <div className="text-sm sm:text-base lg:text-lg font-light text-gray-800 dark:text-gray-200">
+                    <div className="text-sm sm:text-base lg:text-lg xl:text-lg font-light text-gray-800 dark:text-gray-200">
                       {stats.public_repos}
                     </div>
-                    <div className="text-xs text-gray-600 dark:text-gray-300 font-mono">
+                    <div className="text-xs xl:text-xs text-gray-600 dark:text-gray-300 font-mono">
                       Repositórios
                     </div>
                   </div>
                   <div className="text-center bg-gray-100/80 dark:bg-gray-900/50 backdrop-blur-sm rounded-lg p-1.5 border border-gray-200 dark:border-gray-500">
-                    <div className="text-sm sm:text-base lg:text-lg font-light text-gray-800 dark:text-gray-200">
+                    <div className="text-sm sm:text-base lg:text-lg xl:text-lg font-light text-gray-800 dark:text-gray-200">
                       {stats.followers}
                     </div>
-                    <div className="text-xs text-gray-600 dark:text-gray-300 font-mono">
+                    <div className="text-xs xl:text-xs text-gray-600 dark:text-gray-300 font-mono">
                       Seguidores
                     </div>
                   </div>
                   <div className="text-center bg-gray-100/80 dark:bg-gray-900/50 backdrop-blur-sm rounded-lg p-1.5 border border-gray-200 dark:border-gray-500">
-                    <div className="text-sm sm:text-base lg:text-lg font-light text-gray-800 dark:text-gray-200">
+                    <div className="text-sm sm:text-base lg:text-lg xl:text-lg font-light text-gray-800 dark:text-gray-200">
                       {Object.keys(languages).length}
                     </div>
-                    <div className="text-xs text-gray-600 dark:text-gray-300 font-mono">
+                    <div className="text-xs xl:text-xs text-gray-600 dark:text-gray-300 font-mono">
                       Linguagens
                     </div>
                   </div>
                   <div className="text-center bg-gray-100/80 dark:bg-gray-900/50 backdrop-blur-sm rounded-lg p-1.5 border border-gray-200 dark:border-gray-500">
-                    <div className="text-sm sm:text-base lg:text-lg font-light text-gray-800 dark:text-gray-200">
+                    <div className="text-sm sm:text-base lg:text-lg xl:text-lg font-light text-gray-800 dark:text-gray-200">
                       {stats.following}
                     </div>
-                    <div className="text-xs text-gray-600 dark:text-gray-300 font-mono">
+                    <div className="text-xs xl:text-xs text-gray-600 dark:text-gray-300 font-mono">
                       Seguindo
                     </div>
                   </div>
@@ -306,7 +305,7 @@ const Home = () => {
                 {/* Top Languages */}
                 {Object.keys(languages).length > 0 && (
                   <div>
-                    <h3 className="text-sm sm:text-base font-light text-purple-600 dark:text-purple-400 mb-1.5">
+                    <h3 className="text-sm sm:text-base xl:text-lg font-light text-purple-600 dark:text-purple-400 mb-1.5">
                       Top Linguagens
                     </h3>
                     <div className="flex flex-wrap gap-1">
@@ -331,11 +330,11 @@ const Home = () => {
       </div>
 
       {/* Right Side - Skills & Projects */}
-      <div className="flex-1 bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-white flex flex-col justify-center px-4 sm:px-6 lg:px-8 xl:px-12 py-4 lg:py-6 relative z-10">
-        <div className="max-w-lg h-full flex flex-col">
+      <div className="flex-1 bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-white flex flex-col justify-center px-4 sm:px-6 lg:px-8 xl:px-16 2xl:px-24 py-4 lg:py-6 relative z-10">
+        <div className="max-w-lg xl:max-w-xl 2xl:max-w-2xl h-full flex flex-col">
           {/* Skills */}
           <div className="mb-6 lg:mb-8">
-            <h3 className="text-base text-purple-600 dark:text-purple-400 sm:text-lg font-light mb-2 sm:mb-3">
+            <h3 className="text-base text-purple-600 dark:text-purple-400 sm:text-lg xl:text-lg 2xl:text-xl font-light mb-2 sm:mb-3">
               Stacks
             </h3>
             <div className="space-y-1">
@@ -344,7 +343,7 @@ const Home = () => {
                   <FaMobileScreen className="inline-block mr-1" />
                   Frontend
                 </span>
-                <span className="text-gray-900 dark:text-white text-xs">
+                <span className="text-gray-900 dark:text-white text-xs xl:text-sm">
                   React • Next.js • Vite.js • Vue • Tailwind CSS
                 </span>
               </div>
@@ -353,7 +352,7 @@ const Home = () => {
                   <FaServer className="inline-block mr-1" />
                   Backend
                 </span>
-                <span className="text-gray-900 dark:text-white text-xs">
+                <span className="text-gray-900 dark:text-white text-xs xl:text-sm">
                   Node.js • Python • Typescript • Javascript • Express
                 </span>
               </div>
@@ -362,7 +361,7 @@ const Home = () => {
                   <FaDatabase className="inline-block mr-1" />
                   Database
                 </span>
-                <span className="text-gray-900 dark:text-white text-xs">
+                <span className="text-gray-900 dark:text-white text-xs xl:text-sm">
                   PostgreSQL • MySQL
                 </span>
               </div>
@@ -371,7 +370,7 @@ const Home = () => {
                   <FaCloud className="inline-block mr-1" />
                   Cloud
                 </span>
-                <span className="text-gray-900 dark:text-white text-xs">
+                <span className="text-gray-900 dark:text-white text-xs xl:text-sm">
                   Digital Ocean • Vercel • Docker • Render • Containers • VMs
                 </span>
               </div>
@@ -381,7 +380,7 @@ const Home = () => {
           {/* Selected Projects */}
           <div className="relative flex-1 flex flex-col min-h-0">
             <div className="flex items-center justify-between mb-2 sm:mb-3">
-              <h3 className="text-base text-purple-600 dark:text-purple-400 sm:text-lg font-light">
+              <h3 className="text-base text-purple-600 dark:text-purple-400 sm:text-lg xl:text-lg 2xl:text-xl font-light">
                 Repositórios / Projetos Públicos
               </h3>
               {/* Scroll indicator - only visible on desktop */}

@@ -8,21 +8,13 @@ import {
   FaLinkedinIn,
   FaProjectDiagram,
   FaGithub,
-  FaDatabase,
-  FaCloud,
 } from "react-icons/fa";
-import { FaFilePdf, FaMobileScreen, FaServer } from "react-icons/fa6";
+import { FaFilePdf } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 
 import ProjetosModal from "./modals/projects";
-import FeedLinks from "../components/FeedLinks";
 
-// Tipos para as stats do GitHub
-interface GitHubStats {
-  public_repos: number;
-  followers: number;
-  following: number;
-}
+
 
 interface GitHubRepo {
   id: number;
@@ -67,61 +59,13 @@ const useGitHubRepos = (username: string) => {
   return { repos, loading };
 };
 
-// Hook para buscar stats do GitHub
-const useGitHubStats = (username: string) => {
-  const [stats, setStats] = useState<GitHubStats | null>(null);
-  const [languages, setLanguages] = useState<{ [key: string]: number }>({});
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        // Busca dados do usuário
-        const userResponse = await fetch(
-          `https://api.github.com/users/${username}`,
-        );
-        const userData = await userResponse.json();
-        setStats(userData);
-
-        // Busca repositórios para calcular linguagens
-        const reposResponse = await fetch(
-          `https://api.github.com/users/${username}/repos?per_page=100`,
-        );
-        const reposData = await reposResponse.json();
-
-        // Conta linguagens mais usadas
-        const langCount: { [key: string]: number } = {};
-        reposData.forEach((repo: GitHubRepo) => {
-          if (repo.language) {
-            langCount[repo.language] = (langCount[repo.language] || 0) + 1;
-          }
-        });
-
-        setLanguages(langCount);
-      } catch (error) {
-        console.error("Erro ao buscar stats:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchStats();
-  }, [username]);
-
-  return { stats, languages, loading };
-};
 
 const Home = () => {
   const [modalOpen, setModalOpen] = useState(false);
   // Busca os repositórios do GitHub
   const { repos, loading } = useGitHubRepos("eugaelgomes");
-  // Busca as stats do GitHub
-  const {
-    stats,
-    languages,
-    loading: statsLoading,
-  } = useGitHubStats("eugaelgomes");
-  const year = new Date().getFullYear();
+
 
   // Calcula idade de forma simples
   const calculateAge = () => {
@@ -140,7 +84,7 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen lg:h-screen bg-white dark:bg-gray-900 overflow-x-hidden overflow-y-auto lg:overflow-hidden flex flex-col lg:flex-row relative">
+    <div className="min-h-screen lg:h-screen bg-white overflow-x-hidden overflow-y-auto lg:overflow-hidden flex flex-col lg:flex-row relative">
       {/* Left Side - Main Content */}
       <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-8 xl:px-16 2xl:px-24 py-4 lg:py-6 relative z-10">
         <div className="max-w-xl xl:max-w-2xl 2xl:max-w-3xl">
@@ -169,14 +113,19 @@ const Home = () => {
             </div>
           </div>
 
-          <p className="text-xs sm:text-sm xl:text-sm 2xl:text-base text-justify text-gray-700 dark:text-gray-200 mb-3 sm:mb-4 xl:mb-5 leading-relaxed">
-            Curioso, tento ser autodidata e movido a café e código ☕💻.
-            Graduando em Engenharia de Software, Analista de Prompt/CS em uma HR
-            Tech e estudos com foco em desenvolvimento full-stack e IA. Tô
-            sempre criando, reciclando e fazendo novos projetos devs com viés de
-            aprendizado. Colocando em prática, ou, aprendendo com a prática as
-            stacks e ferramentas.
-          </p>
+          <div className="text-xs sm:text-sm xl:text-sm 2xl:text-base text-justify text-gray-700 dark:text-gray-200 mb-3 sm:mb-4 xl:mb-5 leading-relaxed space-y-2">
+            <p>
+              Estudante de Engenharia de Software na FBV Wyden e Técnico em
+              Desenvolvimento de Sistemas. Atualmente, atuo como Analista de
+              Prompt de IA e Dados na @Recrut.AI, desenvolvendo agentes de IA
+              para automatizar processos de recrutamento e seleção.
+            </p>
+            <p>
+              Criando a Weave, uma plataforma inteligente de gestão de projetos e
+              antecipação de riscos que integra metodologias ágeis com IA
+              proativa.
+            </p>
+          </div>
 
           {/* Contact Links */}
           <div className="flex gap-2 sm:gap-3 xl:gap-3 flex-wrap mb-3 sm:mb-4 xl:mb-5">
@@ -248,131 +197,56 @@ const Home = () => {
             </div>
           </div>
 
-          {/* GitHub Stats */}
+          {/* Stacks Section */}
           <div className="mt-3 sm:mt-4">
             <h3 className="text-sm sm:text-base xl:text-base 2xl:text-lg font-light text-purple-600 dark:text-purple-400 mb-2">
-              GitHub Stats
+              Stacks
             </h3>
-
-            {statsLoading ? (
-              // Loading placeholder
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
-                {[...Array(4)].map((_, i) => (
-                  <div key={i} className="text-center">
-                    <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded mb-1 animate-pulse"></div>
-                    <div className="h-2 bg-gray-300 dark:bg-gray-700 rounded animate-pulse"></div>
-                  </div>
-                ))}
-              </div>
-            ) : stats ? (
-              <>
-                {/* Stats Numbers */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 mb-3">
-                  <div className="text-center bg-gray-100/80 dark:bg-gray-900/50 backdrop-blur-sm rounded-lg p-1.5 border border-gray-200 dark:border-gray-500">
-                    <div className="text-sm sm:text-base lg:text-lg xl:text-lg font-light text-gray-800 dark:text-gray-200">
-                      {stats.public_repos}
-                    </div>
-                    <div className="text-xs xl:text-xs text-gray-600 dark:text-gray-300 font-mono">
-                      Repositórios
-                    </div>
-                  </div>
-                  <div className="text-center bg-gray-100/80 dark:bg-gray-900/50 backdrop-blur-sm rounded-lg p-1.5 border border-gray-200 dark:border-gray-500">
-                    <div className="text-sm sm:text-base lg:text-lg xl:text-lg font-light text-gray-800 dark:text-gray-200">
-                      {stats.followers}
-                    </div>
-                    <div className="text-xs xl:text-xs text-gray-600 dark:text-gray-300 font-mono">
-                      Seguidores
-                    </div>
-                  </div>
-                  <div className="text-center bg-gray-100/80 dark:bg-gray-900/50 backdrop-blur-sm rounded-lg p-1.5 border border-gray-200 dark:border-gray-500">
-                    <div className="text-sm sm:text-base lg:text-lg xl:text-lg font-light text-gray-800 dark:text-gray-200">
-                      {Object.keys(languages).length}
-                    </div>
-                    <div className="text-xs xl:text-xs text-gray-600 dark:text-gray-300 font-mono">
-                      Linguagens
-                    </div>
-                  </div>
-                  <div className="text-center bg-gray-100/80 dark:bg-gray-900/50 backdrop-blur-sm rounded-lg p-1.5 border border-gray-200 dark:border-gray-500">
-                    <div className="text-sm sm:text-base lg:text-lg xl:text-lg font-light text-gray-800 dark:text-gray-200">
-                      {stats.following}
-                    </div>
-                    <div className="text-xs xl:text-xs text-gray-600 dark:text-gray-300 font-mono">
-                      Seguindo
-                    </div>
-                  </div>
-                </div>
-
-                {/* Top Languages */}
-                {Object.keys(languages).length > 0 && (
-                  <div>
-                    <h3 className="text-sm sm:text-base xl:text-lg font-light text-purple-600 dark:text-purple-400 mb-1.5">
-                      Top Linguagens
-                    </h3>
-                    <div className="flex flex-wrap gap-1">
-                      {Object.entries(languages)
-                        .sort(([, a], [, b]) => b - a)
-                        .slice(0, 3)
-                        .map(([lang, count]) => (
-                          <span
-                            key={lang}
-                            className="bg-gray-200/80 dark:bg-gray-900/50 backdrop-blur-sm text-gray-800 dark:text-white text-xs font-semibold px-2 py-0.5 rounded-full font-mono shadow-sm"
-                          >
-                            {lang} ({count})
-                          </span>
-                        ))}
-                    </div>
-                  </div>
-                )}
-              </>
-            ) : null}
+            <div className="flex flex-wrap gap-y-1.5 mt-2">
+              {[
+                "React", "Next.js", "Vite.js", "Vue", "Tailwind CSS",
+                "Node.js", "Python", "TypeScript", "JavaScript", "Express",
+                "PostgreSQL", "MySQL", "Digital Ocean", "Vercel", "Docker",
+                "Render", "Containers", "VMs"
+              ].map((tech, i, arr) => (
+                <span key={tech} className="whitespace-nowrap text-gray-600 dark:text-gray-400 text-xs xl:text-sm hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                  {tech}{i < arr.length - 1 && <span className="text-gray-400/50 dark:text-gray-500/50 mx-2">•</span>}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
       {/* Right Side - Skills & Projects */}
-      <div className="flex-1 bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-white flex flex-col justify-center px-4 sm:px-6 lg:px-8 xl:px-16 2xl:px-24 py-4 lg:py-6 relative z-10">
+      <div className="flex-1 bg-white text-gray-800 flex flex-col justify-center px-4 sm:px-6 lg:px-8 xl:px-16 2xl:px-24 py-4 lg:py-6 relative z-10">
         <div className="max-w-lg xl:max-w-xl 2xl:max-w-2xl h-full flex flex-col">
-          {/* Skills */}
-          <div className="mb-6 lg:mb-8">
-            <h3 className="text-base text-purple-600 dark:text-purple-400 sm:text-lg xl:text-lg 2xl:text-xl font-light mb-2 sm:mb-3">
-              Stacks
-            </h3>
-            <div className="space-y-1">
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0 p-1.5 rounded-lg bg-gray-900/5 dark:bg-white/5 backdrop-blur-sm border border-gray-300/50 dark:border-slate-700/50">
-                <span className="flex items-center font-mono text-gray-600 dark:text-gray-400 text-xs">
-                  <FaMobileScreen className="inline-block mr-1" />
-                  Frontend
-                </span>
-                <span className="text-gray-900 dark:text-white text-xs xl:text-sm">
-                  React • Next.js • Vite.js • Vue • Tailwind CSS
-                </span>
+
+          {/* Weave Highlight */}
+          <div 
+            className="relative flex-1 flex flex-col min-h-0 mb-4 sm:mb-6 p-2 rounded-xl overflow-hidden bg-cover bg-center bg-no-repeat group"
+            style={{ backgroundImage: "url('/weave.png')" }}
+          >
+            {/* Overlay em gradiente para proteger apenas os textos (topo e base) */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/20 opacity-90 group-hover:opacity-70 transition-opacity"></div>
+            
+            <div className="relative z-10 flex flex-col flex-1 justify-between">
+              <div className="flex items-center justify-between">
+                <h4 className="text-md sm:text-lg font-bold text-white drop-shadow-lg">
+                  Weave
+                </h4>
+                <a
+                  href="https://weavenotes.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-white hover:text-purple-300 underline transition-colors drop-shadow-lg"
+                >
+                  Conheça o Weave
+                </a>
               </div>
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0 p-1.5 rounded-lg bg-gray-900/5 dark:bg-white/5 backdrop-blur-sm border border-gray-300/50 dark:border-slate-700/50">
-                <span className="flex items-center font-mono text-gray-600 dark:text-gray-400 text-xs">
-                  <FaServer className="inline-block mr-1" />
-                  Backend
-                </span>
-                <span className="text-gray-900 dark:text-white text-xs xl:text-sm">
-                  Node.js • Python • Typescript • Javascript • Express
-                </span>
-              </div>
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0 p-1.5 rounded-lg bg-gray-900/5 dark:bg-white/5 backdrop-blur-sm border border-gray-300/50 dark:border-slate-700/50">
-                <span className="flex items-center font-mono text-gray-600 dark:text-gray-400 text-xs">
-                  <FaDatabase className="inline-block mr-1" />
-                  Database
-                </span>
-                <span className="text-gray-900 dark:text-white text-xs xl:text-sm">
-                  PostgreSQL • MySQL
-                </span>
-              </div>
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0 p-1.5 rounded-lg bg-gray-900/5 dark:bg-white/5 backdrop-blur-sm border border-gray-300/50 dark:border-slate-700/50">
-                <span className="flex items-center font-mono text-gray-600 dark:text-gray-400 text-xs">
-                  <FaCloud className="inline-block mr-1" />
-                  Cloud
-                </span>
-                <span className="text-gray-900 dark:text-white text-xs xl:text-sm">
-                  Digital Ocean • Vercel • Docker • Render • Containers • VMs
-                </span>
+              <div className="flex flex-wrap gap-2 mt-auto">
+                <span className="text-[10px] sm:text-xs font-mono text-white drop-shadow-lg">#IA-Proativa</span>
+                <span className="text-[10px] sm:text-xs font-mono text-white drop-shadow-lg">#Gestão-Ágil</span>
               </div>
             </div>
           </div>
@@ -380,12 +254,12 @@ const Home = () => {
           {/* Selected Projects */}
           <div className="relative flex-1 flex flex-col min-h-0">
             <div className="flex items-center justify-between mb-2 sm:mb-3">
-              <h3 className="text-base text-purple-600 dark:text-purple-400 sm:text-lg xl:text-lg 2xl:text-xl font-light">
-                Repositórios / Projetos Públicos
+              <h3 className="text-base text-purple-600 dark:text-purple-400 sm:text-md xl:text-md font-light">
+                Repositórios públicos
               </h3>
               {/* Scroll indicator - only visible on desktop */}
               <div className="hidden lg:flex items-center text-gray-600 dark:text-slate-400 text-xs">
-                <span className="mr-1">Dê scroll para ver tudo</span>
+                <span className="mr-1 text-[10px]">Dê scroll para ver tudo</span>
                 <div className="w-3 h-3 border border-gray-500 dark:border-slate-500 rounded-sm flex items-center justify-center">
                   <div className="w-1 h-1 bg-purple-600 dark:bg-purple-400 rounded-full animate-bounce"></div>
                 </div>
@@ -459,15 +333,7 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Footer */}
-          <div className="mt-4 sm:mt-6 flex-shrink-0">
-            <div className="flex gap-50 sm:gap-8 items-center">
-              <FeedLinks className="justify-start" />
-              <p className="text-gray-600 dark:text-slate-400 text-xs font-mono">
-                © {year} Gael Gomes
-              </p>
-            </div>
-          </div>
+
         </div>
       </div>
 
